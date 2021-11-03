@@ -19,10 +19,10 @@ const verticalCenter = {
 
 const Banner = () => {
     return (
-        <Container style={bannerBg} sx={{ flexGrow: 1 }}>
-            <Grid container spacing={2}>
+        <Container sx={{ flexGrow: 1 }}>
+            <Grid container spacing={2} sx={{ margin: '0 auto' }}>
                 <Grid item style={{ ...verticalCenter, textAlign: 'left' }} xs={12} md={6}>
-                    <Box>
+                    <Box sx={{ margin: '0 auto' }}>
                         <Typography variant="h3">
                             Your New Smile <br />
                             Starts Here
@@ -34,7 +34,7 @@ const Banner = () => {
                     </Box>
                 </Grid>
                 <Grid item xs={12} md={6} style={verticalCenter} >
-                    <img style={{ width: '350px' }} src={chair} alt="" />
+                    <img style={{ width: '350px', margin: '0 auto' }} src={chair} alt="" />
                 </Grid>
 
             </Grid>
