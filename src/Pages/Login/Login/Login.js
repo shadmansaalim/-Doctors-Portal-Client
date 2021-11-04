@@ -1,11 +1,16 @@
-import { Container, Grid, Typography, TextField, Button } from '@mui/material';
+import { Container, Grid, Typography, TextField, Button, CircularProgress, Alert } from '@mui/material';
 import React from 'react';
 import { useState } from 'react';
 import login from '../../../images/login.png';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory, useLocation } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth';
 
 const Login = () => {
     const [loginData, setLoginData] = useState({});
+    const { user, loginUser, isLoading, authError } = useAuth();
+
+    const location = useLocation();
+    const history = useHistory();
 
     const handleOnChange = e => {
         const field = e.target.name;
@@ -16,6 +21,7 @@ const Login = () => {
     }
 
     const handleLoginSubmit = e => {
+        loginUser(loginData.email, loginData.password, location, history);
         e.preventDefault();
     }
     return (
@@ -48,6 +54,15 @@ const Login = () => {
                             to="/register">
                             <Button variant="text">New User? Please Register</Button>
                         </NavLink>
+                        {
+                            isLoading && <CircularProgress />
+                        }
+                        {
+                            user?.email && <Alert severity="success">Account Registered Successfully</Alert>
+                        }
+                        {
+                            authError && <Alert severity="error">{authError}</Alert>
+                        }
                     </form>
                 </Grid>
                 <Grid item xs={12} md={6}>
