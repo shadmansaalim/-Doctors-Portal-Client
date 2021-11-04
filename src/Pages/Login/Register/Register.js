@@ -3,9 +3,11 @@ import React from 'react';
 import { useState } from 'react';
 import login from '../../../images/login.png';
 import { NavLink } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth';
 
 const Register = () => {
     const [loginData, setLoginData] = useState({});
+    const { registerUser } = useAuth();
 
     const handleOnChange = e => {
         const field = e.target.name;
@@ -17,8 +19,10 @@ const Register = () => {
 
     const handleLoginSubmit = e => {
         if (loginData.password !== loginData.password2) {
-            alert('Hoituno');
+            alert('Password not matched');
+            return;
         }
+        registerUser(loginData.email, loginData.password);
         e.preventDefault();
         e.target.reset();
     }
@@ -61,7 +65,7 @@ const Register = () => {
                             variant="standard"
                             required
                         />
-                        <Button sx={{ width: '75%', m: 1 }} variant="contained" type="submit">Login</Button>
+                        <Button sx={{ width: '75%', m: 1 }} variant="contained" type="submit">Register</Button>
                         <NavLink
                             style={{ textDecoration: 'none' }}
                             to="/login">
