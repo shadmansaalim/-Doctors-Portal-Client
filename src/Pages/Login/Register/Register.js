@@ -2,15 +2,15 @@ import { Container, Grid, Typography, TextField, Button, CircularProgress, Alert
 import React from 'react';
 import { useState } from 'react';
 import login from '../../../images/login.png';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 
 const Register = () => {
     const [loginData, setLoginData] = useState({});
     const { user, registerUser, isLoading, authError } = useAuth();
+    const history = useHistory();
 
-
-    const handleOnChange = e => {
+    const handleOnBlur = e => {
         const field = e.target.name;
         const value = e.target.value;
         const newLoginData = { ...loginData };
@@ -23,7 +23,7 @@ const Register = () => {
             alert('Password not matched');
             return;
         }
-        registerUser(loginData.email, loginData.password);
+        registerUser(loginData.name, loginData.email, loginData.password, history);
         e.preventDefault();
         e.target.reset();
     }
@@ -42,10 +42,20 @@ const Register = () => {
                                 <TextField
                                     sx={{ width: '75%', m: 1 }}
                                     id="standard-basic"
+                                    label="Your Name"
+                                    name="name"
+                                    type="text"
+                                    onBlur={handleOnBlur}
+                                    variant="standard"
+                                    required
+                                />
+                                <TextField
+                                    sx={{ width: '75%', m: 1 }}
+                                    id="standard-basic"
                                     label="Your Email"
                                     name="email"
                                     type="email"
-                                    onChange={handleOnChange}
+                                    onBlur={handleOnBlur}
                                     variant="standard"
                                     required
                                 />
@@ -55,7 +65,7 @@ const Register = () => {
                                     label="Your Password"
                                     type="password"
                                     name="password"
-                                    onChange={handleOnChange}
+                                    onBlur={handleOnBlur}
                                     variant="standard"
                                     required
                                 />
@@ -65,7 +75,7 @@ const Register = () => {
                                     label="Confirm Password"
                                     type="password"
                                     name="password2"
-                                    onChange={handleOnChange}
+                                    onBlur={handleOnBlur}
                                     variant="standard"
                                     required
                                 />
