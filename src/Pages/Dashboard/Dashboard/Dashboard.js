@@ -15,13 +15,17 @@ import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-
+import { Grid } from '@mui/material';
+import Calender from '../../Shared/Calender/Calender'
+import Appointments from '../Appointments/Appointments';
+import { useState } from 'react';
 const drawerWidth = 240;
 
 function Dashboard(props) {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
-
+    const [date, setDate] = useState(new Date());
+    console.log(date);
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
@@ -32,17 +36,6 @@ function Dashboard(props) {
             <Divider />
             <List>
                 {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>
-                            {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                        </ListItemIcon>
-                        <ListItemText primary={text} />
-                    </ListItem>
-                ))}
-            </List>
-            <Divider />
-            <List>
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
                     <ListItem button key={text}>
                         <ListItemIcon>
                             {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
@@ -77,7 +70,7 @@ function Dashboard(props) {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap component="div">
-                        Responsive drawer
+                        Dashboard
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -119,7 +112,21 @@ function Dashboard(props) {
             >
                 <Toolbar />
                 <Typography paragraph>
-                    content here
+                    <Grid container spacing={2}>
+
+                        <Grid item xs={12} md={4}>
+                            <Calender
+                                date={date}
+                                setDate={setDate}
+                            ></Calender>
+                        </Grid>
+                        <Grid item xs={12} md={8}>
+                            <Appointments
+                                date={date}
+                            ></Appointments>
+                        </Grid>
+
+                    </Grid>
                 </Typography>
 
             </Box>

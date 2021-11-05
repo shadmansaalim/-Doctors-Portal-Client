@@ -1,12 +1,15 @@
+import { Grid } from '@mui/material';
 import React from 'react';
-import { Grid, Paper, Typography, Button } from '@mui/material';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 import BookingModal from '../BookingModal/BookingModal';
+
 const Booking = ({ booking, date, setBookingSuccess }) => {
     const { name, time, space } = booking;
-    const [openBooking, setOpenBooking] = React.useState(false);
-    const handleBookingOpen = () => setOpenBooking(true);
-    const handleBookingClose = () => setOpenBooking(false);
-
+    const [openBooking, setBookingOpen] = React.useState(false);
+    const handleBookingOpen = () => setBookingOpen(true);
+    const handleBookingClose = () => setBookingOpen(false);
     return (
         <>
             <Grid item xs={12} sm={6} md={4}>
@@ -24,11 +27,11 @@ const Booking = ({ booking, date, setBookingSuccess }) => {
                 </Paper>
             </Grid>
             <BookingModal
-                setBookingSuccess={setBookingSuccess}
                 date={date}
                 booking={booking}
                 openBooking={openBooking}
                 handleBookingClose={handleBookingClose}
+                setBookingSuccess={setBookingSuccess}
             ></BookingModal>
         </>
     );
