@@ -19,6 +19,8 @@ import { Grid } from '@mui/material';
 import Calender from '../../Shared/Calender/Calender'
 import Appointments from '../Appointments/Appointments';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Button } from '@mui/material';
 const drawerWidth = 240;
 
 function Dashboard(props) {
@@ -34,6 +36,9 @@ function Dashboard(props) {
         <div>
             <Toolbar />
             <Divider />
+            <Link style={{ textDecoration: 'none', color: 'white' }} to="/appointment">
+                <Button color="inherit">Appointment</Button>
+            </Link>
             <List>
                 {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
                     <ListItem button key={text}>
